@@ -10,8 +10,10 @@ import MeritListInfo from './pages/MeritListInfo';
 import ErrorNoteForMeritList from './pages/ErrorNoteForMeritList';
 
 function App() {
+
+  
   return (
-    <Router>
+    <Router basename={"/"}>
       <div className="App h-screen text-white flex justify-center items-center ">
 
         <Navbar />
