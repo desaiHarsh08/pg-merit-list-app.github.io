@@ -30,7 +30,7 @@ const Home = () => {
    }*/
 
     const excelFileUrl = process.env.REACT_APP_EXCEL_FILE; 
-
+   console.log(excelFileUrl)
     fetch(excelFileUrl)
       .then((response) => response.arrayBuffer())
       .then((data) => {
