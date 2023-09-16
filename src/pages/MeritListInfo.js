@@ -49,15 +49,15 @@ const MeritListInfo = () => {
 
           </div>
         </div>
-        <div id="section-2" className='p-4  flex justify-center '>
-          <div id="table" className='border-l border-t border-r  overflow-x-auto w-[686px] '>
-            <div id="row-1" className='flex border-b  overflow-x-auto w-[686px]'>
+        <div id="section-2" className='p-4  flex justify-center w-full '>
+          <div id="table" className='border-l border-t border-r w-full '>
+            <div id="row-1" className='flex border-b w-full '>
               <div id="name" className='border-r  text-center w-1/4 py-2'>Name</div>
               <div className='invisible w-1/4 py-2'>Dummy column</div>
               <div className='invisible w-1/4 py-2'>Dummy column</div>
               <div className='invisible w-1/4 py-2'>Dummy column</div>
             </div>
-            <div id="row-2" className='flex border-b  overflow-x-auto w-[686px]'>
+            <div id="row-2" className='flex border-b w-full'>
               <div id="row-2-col-1" className='w-1/2 border-b'>
                 <div className='border-r border-b border-l  flex justify-center items-center text-center py-2'>App No.</div>
                 <div className='border-r  flex justify-center items-center py-2'>001</div>
@@ -84,7 +84,7 @@ const MeritListInfo = () => {
               </div> */}
 
             </div>
-            <div id="row-3" className='flex border-b  overflow-x-auto w-[686px]'>
+            <div id="row-3" className='flex border-b w-full'>
               
               <div id="row-2-col-2" className='w-1/2 border-b'>
                 <div className='border-r border-b   flex justify-center items-center text-center py-2'>Session</div>
