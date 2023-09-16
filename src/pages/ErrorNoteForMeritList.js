@@ -12,7 +12,7 @@ const ErrorNoteForMeritList = () => {
                             east
                         </span>
                         <span>
-                            Your application has not made it to the first Merit list which was published on <span className='bg-yellow-300'>INPUT BOX</span>.
+                            Your application has not made it to the first Merit list which was published on <span className='text-blue-700 font-medium'>16th September 2023</span>.
                         </span>
                     </li>
                     <li className='text-red-500 flex gap-2 items-center'>
@@ -20,7 +20,7 @@ const ErrorNoteForMeritList = () => {
                             east
                         </span>
                         <span>
-                            We suggest you wait for the second merit list, which could be published around <span className='bg-yellow-300'>INPUT BOX</span> subject to
+                            We suggest you wait for the second merit list, which could be published around <span className='text-blue-700 font-medium'>20th September 2023</span> subject to
                             the availability of seats and fulfilment of cut-off.
                         </span>
                     </li>
