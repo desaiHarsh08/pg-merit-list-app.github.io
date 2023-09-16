@@ -9,6 +9,7 @@ const Home = () => {
 
   // const excelFilePath = "../assets/PG ML LIST 1 160923.xlsx";
 
+  // eslint-disable-next-line
   const [mydata, setMyData] = useState({
     A: 0,
     C: [],
@@ -16,11 +17,11 @@ const Home = () => {
     F: ''
   });
 
-  const [excelData, setExcelData] = useState([]);
+  
 
   useEffect(() => {
     
-  }, [mydata]);
+  }, [mydata, navigate]);
 
   const handleDisplay = (contact)=> {
     /* if(contact === null) {
@@ -43,7 +44,7 @@ const Home = () => {
         const jsonData = XLSX.utils.sheet_to_json(sheet);
 
         for (let index = 1; index < jsonData.length; index++) {
-          if (jsonData[index].E == contact) {
+          if (parseFloat(jsonData[index].E) === parseFloat(contact)) {
             localStorage.setItem('contact', jsonData[index].E)
             // console.log('Navigating to /merit-list-info');
             navigate("/merit-list-info", {replace: true})

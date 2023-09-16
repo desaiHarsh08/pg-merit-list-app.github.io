@@ -15,7 +15,7 @@ const MeritListInfo = () => {
     F: ''
   });
 
-  const [excelData, setExcelData] = useState([]);
+  // const [excelData, setExcelData] = useState([]);
 
   useEffect(() => {
     const contact = parseFloat(localStorage.getItem('contact'));
@@ -41,7 +41,7 @@ const MeritListInfo = () => {
 
         const courseNamesArray = [];
         for (let index = 1; index < jsonData.length; index++) {
-          if (jsonData[index].E === contact) {
+          if (parseFloat(jsonData[index].E) === parseFloat(contact)) {
 
 
             courseNamesArray.push(jsonData[index].C);
@@ -57,7 +57,7 @@ const MeritListInfo = () => {
         }
 
       });
-  }, [mydata]);
+  }, [mydata, navigate]);
 
 
   const handleClose = (e) => {
