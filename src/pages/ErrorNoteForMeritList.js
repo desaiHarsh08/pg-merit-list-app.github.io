@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const ErrorNoteForMeritList = () => {
     return (
-        <div className='bg-white text-black p-4 w-[90%] h-[70vh] overflow-y-scroll  sm:w-[70%] lg:w-1/2 flex flex-col gap-5 justify-between'>
+        <div className='bg-white text-black p-4 w-[90%] h-[67vh] overflow-y-scroll  sm:w-[70%] lg:w-1/2 flex flex-col gap-5 justify-between'>
             <div id='section-1'>
                 <h1 className='my-3 text-xl lg:text-2xl font-semibold  uppercase border-b-2 pb-2 text-slate-600 '>Error notes:</h1>
                 <ul className='flex flex-col gap-3'>
