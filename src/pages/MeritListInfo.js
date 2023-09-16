@@ -1,12 +1,67 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import * as XLSX from "xlsx"
+
 
 const MeritListInfo = () => {
 
   let navigate = useNavigate();
 
+
+  const [mydata, setMyData] = useState({
+    A: 0,
+    C: [],
+    D: '',
+    F: ''
+  });
+
+  const [excelData, setExcelData] = useState([]);
+
+  useEffect(() => {
+    const contact = parseFloat(localStorage.getItem('contact'));
+    if(contact === null) {
+        localStorage.clear();
+        navigate("/", { replace: true });
+   }
+
+    const excelFileUrl = process.env.REACT_APP_EXCEL_FILE; 
+
+    fetch(excelFileUrl)
+      .then((response) => response.arrayBuffer())
+      .then((data) => {
+        const workbook = XLSX.read(data, { type: 'array' });
+
+        // Assuming you want the first sheet
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+
+        // Convert sheet data to JSON
+        const jsonData = XLSX.utils.sheet_to_json(sheet);
+
+
+        const courseNamesArray = [];
+        for (let index = 1; index < jsonData.length; index++) {
+          if (jsonData[index].E === contact) {
+
+
+            courseNamesArray.push(jsonData[index].C);
+
+            setMyData({
+              A: jsonData[index].A,
+              C: courseNamesArray,
+              D: jsonData[index].D,
+              F: jsonData[index].F,
+            })
+          }
+
+        }
+
+      });
+  }, [mydata]);
+
+
   const handleClose = (e) => {
-    console.log('fired');
+    localStorage.clear()
     navigate("/", { replace: true });
   }
 
@@ -28,22 +83,18 @@ const MeritListInfo = () => {
                 Only the applications that have been Merit listed will be shown in this screen.
               </li>
               <li>
-                Applicants who have completed their application process by <span className='bg-yellow-300'>INPUT BOX</span> have been
-
-                considered for this Merit list.
+                Applicants who have completed their application process by 15th September, 2023 have been considered for this Merit list.
               </li>
               <li>
-                Last date of payment of fees for Merit list I is <span className='bg-yellow-300'>INPUT BOX</span>.
+                Last date of payment of fees for Merit list I is 19th September, 2023.
               </li>
               <li>
                 <span className='text-red-500 font-medium'>
-                  Please note that you must pay your admission fees within the last date of admission i.e., <span className='bg-yellow-300'>INPUT BOX</span> and the other steps (as given in the process after Merit list) I.e., Step No. 2 "Add on information" & Step No 3 "Document Upload" needs to be completed within 24 Hours from the date of update of your Admission fees payment.
+                  Please note that you must pay your admission fees within the last date of admission i.e., 19th September, 2023 and the other steps (as given in the process after Merit list) i.e., Step No. 2 “Add on Information” & Step No 3 “Document Upload” needs to be completed within 24 Hours from the date of update of your Admission fees payment.
                 </span>
               </li>
               <li>
-                Any payment made after <span className='bg-yellow-300'>input box</span> July, 2023 shall not be considered valid for
-
-                admission.
+                Any payment made after 19th September, 2023 shall not be considered valid for admission.
               </li>
             </ol>
 
@@ -60,13 +111,24 @@ const MeritListInfo = () => {
             <div id="row-2" className='flex border-b w-full'>
               <div id="row-2-col-1" className='w-1/2 border-b'>
                 <div className='border-r border-b border-l  flex justify-center items-center text-center py-2'>App No.</div>
-                <div className='border-r  flex justify-center items-center py-2'>001</div>
+                <div className='border-r  flex justify-center items-center py-2 '>
+                  {mydata !== null ? mydata.A : ''}
+                </div>
               </div>
               <div className='w-1/2 border-b'>
                 <div className='border-r border-b   flex justify-center items-center text-center py-2'>Course</div>
-                <div className='border-r  flex justify-center items-center py-2'>MCOM</div>
+                <div className='border-r  flex justify-center items-center py-2'>
+                  {/* {mydata.C !=='' ? mydata.C : ''} */}
+                  {mydata.C !=='' ? (
+                    <ul className='flex justify-center items-center flex-col'>
+                      {mydata.C.map((course, index) => (
+                        <li key={index}>{course}</li>
+                      ))}
+                    </ul>
+                  ) : ''}
+                </div>
               </div>
-              
+
               {/* <div id='col-1' className='flex w-1/2'> */}
 
               {/* <div className='invisible border-r w-[20%] py-2'>Dummy column</div> */}
@@ -85,14 +147,15 @@ const MeritListInfo = () => {
 
             </div>
             <div id="row-3" className='flex border-b w-full'>
-              
+
               <div id="row-2-col-2" className='w-1/2 border-b'>
                 <div className='border-r border-b   flex justify-center items-center text-center py-2'>Session</div>
-                <div className='border-r  flex justify-center items-center py-2'>2023-24</div>
+                <div className='border-r  flex justify-center items-center py-2'>
+                  {mydata.D!=='' && mydata.D}</div>
               </div>
               <div id="row-2-col-2" className='w-1/2 border-b'>
                 <div className='border-r border-b   flex justify-center items-center text-center py-2'>Merit list status</div>
-                <div className='border-r  flex justify-center items-center py-2'>-</div>
+                <div className='border-r  flex justify-center items-center py-2'>{mydata.F!=='' && mydata.F}</div>
               </div>
             </div>
 
