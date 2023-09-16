@@ -9,7 +9,7 @@ const MeritListInfo = () => {
 
 
   const [mydata, setMyData] = useState({
-    A: 0,
+    A: [],
     C: [],
     D: '',
     F: ''
@@ -19,12 +19,12 @@ const MeritListInfo = () => {
 
   useEffect(() => {
     const contact = parseFloat(localStorage.getItem('contact'));
-    if(contact === null) {
-        localStorage.clear();
-        navigate("/", { replace: true });
-   }
+    if (contact === null) {
+      localStorage.clear();
+      navigate("/", { replace: true });
+    }
 
-    const excelFileUrl = process.env.REACT_APP_EXCEL_FILE; 
+    const excelFileUrl = process.env.REACT_APP_EXCEL_FILE;
 
     fetch(excelFileUrl)
       .then((response) => response.arrayBuffer())
@@ -40,14 +40,17 @@ const MeritListInfo = () => {
 
 
         const courseNamesArray = [];
+        const appNoArray = [];
         for (let index = 1; index < jsonData.length; index++) {
           if (parseFloat(jsonData[index].E) === parseFloat(contact)) {
 
 
             courseNamesArray.push(jsonData[index].C);
+            appNoArray.push(jsonData[index].A)
+            
 
             setMyData({
-              A: jsonData[index].A,
+              A: appNoArray,
               C: courseNamesArray,
               D: jsonData[index].D,
               F: jsonData[index].F,
@@ -112,14 +115,20 @@ const MeritListInfo = () => {
               <div id="row-2-col-1" className='w-1/2 border-b'>
                 <div className='border-r border-b border-l  flex justify-center items-center text-center py-2'>App No.</div>
                 <div className='border-r  flex justify-center items-center py-2 '>
-                  {mydata !== null ? mydata.A : ''}
+                  {Array.isArray(mydata.A) && mydata.A.length > 0 ? (
+                    <ul className='flex justify-center items-center flex-col'>
+                      {mydata.A.map((appNo, index) => (
+                        <li key={index}>{appNo}</li>
+                      ))}
+                    </ul>
+                  ) : ''}
                 </div>
               </div>
               <div className='w-1/2 border-b'>
                 <div className='border-r border-b   flex justify-center items-center text-center py-2'>Course</div>
                 <div className='border-r  flex justify-center items-center py-2'>
                   {/* {mydata.C !=='' ? mydata.C : ''} */}
-                  {mydata.C !=='' ? (
+                  {mydata.C !== '' ? (
                     <ul className='flex justify-center items-center flex-col'>
                       {mydata.C.map((course, index) => (
                         <li key={index}>{course}</li>
@@ -151,11 +160,11 @@ const MeritListInfo = () => {
               <div id="row-2-col-2" className='w-1/2 border-b'>
                 <div className='border-r border-b   flex justify-center items-center text-center py-2'>Session</div>
                 <div className='border-r  flex justify-center items-center py-2'>
-                  {mydata.D!=='' && mydata.D}</div>
+                  {mydata.D !== '' && mydata.D}</div>
               </div>
               <div id="row-2-col-2" className='w-1/2 border-b'>
                 <div className='border-r border-b   flex justify-center items-center text-center py-2'>Merit list status</div>
-                <div className='border-r  flex justify-center items-center py-2'>{mydata.F!=='' && mydata.F}</div>
+                <div className='border-r  flex justify-center items-center py-2'>{mydata.F !== '' && mydata.F}</div>
               </div>
             </div>
 
