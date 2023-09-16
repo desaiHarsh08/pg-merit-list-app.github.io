@@ -112,12 +112,12 @@ const MeritListInfo = () => {
           <h1 className='my-3 text-xl lg:text-2xl font-semibold  uppercase border-b-2 pb-2 text-slate-600 '>Important Links:</h1>
         </div>
         <div className='flex flex-col gap-4  '>
-          <a href="https://74.207.233.48/AdmissionPG2023/#/" className='block text-center'>
+          <a href="https://74.207.233.48/AdmissionPG2023/#/" target={'_blank'} rel="noreferrer" className='block text-center'>
             <span className='text-blue-500 font-medium underline'>
               Click here to access your Online Applicant Login for completing the process including payment of Admission fees.
             </span>
           </a>
-          <a href="https://thebges.edu.in/wp-content/uploads/2023/09/PG-PROCESS-AFTER-ML-23-24-Final.pdf" className='block text-center'>
+          <a href="https://thebges.edu.in/wp-content/uploads/2023/09/PG-PROCESS-AFTER-ML-23-24-Final.pdf" target={'_blank'} rel="noreferrer" className='block text-center'>
             <span className='text-blue-500 font-medium underline'>
               Click here to access detailed information about the process to be followed on being merit listed.
             </span>
