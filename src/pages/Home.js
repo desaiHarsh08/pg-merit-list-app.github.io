@@ -52,7 +52,8 @@ const Home = () => {
           }
 
         }
-        alert('Please enter the valid mobile number');
+        // alert('Please enter the valid mobile number');
+        navigate("/error-note-for-merit-list", {replace: true});
 
       });
   }
